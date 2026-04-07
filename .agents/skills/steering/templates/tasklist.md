@@ -47,7 +47,12 @@
 - [ ] Expo で起動確認する
   - [ ] `npx expo start`
 
-## フェーズ4: ドキュメント更新
+## フェーズ4: validate-implementation への引き継ぎ準備
+
+- [ ] `requirements.md` / `design.md` / `tasklist.md` が最新であることを確認
+- [ ] 同じ `.steering/[YYYYMMDD]-[task]/` を `validate-implementation` に渡せる状態にする
+
+## フェーズ5: ドキュメント更新
 
 - [ ] README.md を更新（必要に応じて）
 - [ ] `.steering` の振り返り欄を更新

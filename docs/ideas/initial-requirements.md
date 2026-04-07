@@ -2,6 +2,10 @@
 
 Use this document as the starting point for a new project before durable `docs/` files are created.
 
+`define-feature` should create or update this file only when the project-wide bootstrap spec is needed.
+
+Do not use this file as input to `plan-feature`. Run `setup-project` first, then create later feature specs under `docs/ideas/YYYYMMDD-[feature-name].md`.
+
 ## Project Overview
 
 - Project name:

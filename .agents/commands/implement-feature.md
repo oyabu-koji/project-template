@@ -4,7 +4,9 @@ description: steering の tasklist に従って機能を実装する
 
 # implement-feature
 
-引数: 機能名（例: `implement-feature feature-name`）
+引数: 対象 `.steering/[YYYYMMDD]-[feature-name]/` ディレクトリ
+
+例: `implement-feature .steering/20260407-login-refresh/`
 
 このコマンドは `.steering` に作成された設計を元に
 機能を実装します。
@@ -15,11 +17,9 @@ description: steering の tasklist に従って機能を実装する
 
 ## 1. steeringディレクトリ確認
 
-以下のディレクトリを探す
-
-.steering/[YYYYMMDD]-[feature-name]/
-
-その中のファイルを読み込む
+- 指定された `.steering/[YYYYMMDD]-[feature-name]/` が存在するか確認する
+- 存在しない場合は停止する
+- その中のファイルを読み込む
 
 .steering/[YYYYMMDD]-[feature-name]/requirements.md
 .steering/[YYYYMMDD]-[feature-name]/design.md
@@ -70,17 +70,12 @@ npx expo start
 
 ---
 
-## 5. 検証
+## 5. 次のステップ
 
-implementation-validator サブエージェントを呼び出す
+このコマンドでは実装検証を完了させない。
 
-```
-subagent:
-  agent: implementation-validator
-  input:
-    paths:
-      - src
-```
+実装後は別コマンドの `validate-implementation` に、
+同じ `.steering/...` ディレクトリを渡して検証へ進む。
 
 ---
 
@@ -88,4 +83,5 @@ subagent:
 
 - tasklist.md のタスクが完了している
 - lint エラーがない
-- validator による検証が完了している
+- 必要なら `design.md` と `tasklist.md` が最新化されている
+- 次に `validate-implementation` を実行できる状態である

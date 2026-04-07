@@ -32,19 +32,19 @@ This template is the starting point for an AI-driven React Native + Expo + JavaS
 
 1. Read `PROJECT_CONTEXT.md`
 2. Run `init-project` to create the Expo managed workflow baseline
-3. Fill in `docs/ideas/initial-requirements.md`
+3. Use `define-feature` to create `docs/ideas/initial-requirements.md` if it does not exist yet
 4. Run `setup-project` to create the six durable docs
-5. Create `.steering/[YYYYMMDD]-[task]/`
-6. Use `plan-feature` to define requirements, design, and task breakdown
-7. Use `implement-feature` to make changes and update `.steering/.../tasklist.md`
-8. Use `implementation-validator` to review the implementation strictly
+5. Use `define-feature` to create or update `docs/ideas/YYYYMMDD-[feature-name].md`
+6. Use `plan-feature` with the target `docs/ideas/...md` file to create `.steering/[YYYYMMDD]-[task]/`
+7. Use `implement-feature` with the target `.steering/...` directory to make changes and update `tasklist.md`
+8. Use `validate-implementation` with the same `.steering/...` directory to review the implementation strictly
 9. Start the app with `npx expo start`
 10. Use `npx expo start --tunnel` when remote device testing is needed
 
 ### 日本語説明
-基本フローは、まず `PROJECT_CONTEXT.md` と初期要件を読み、`.steering/[YYYYMMDD]-[task]/` を作ってから進める形です。  
-最初に `init-project` で Expo managed workflow の土台を整え、その後 `setup-project` で永続ドキュメントを作成します。  
-設計は `plan-feature`、実装は `implement-feature`、厳しめの検証は `implementation-validator` を使います。  
+基本フローは、まず `PROJECT_CONTEXT.md` を読み、`define-feature` で仕様を整えてから進める形です。  
+最初に `init-project` で Expo managed workflow の土台を整え、その後 `define-feature` と `setup-project` で初期要件と永続ドキュメントを作成します。  
+追加仕様は `define-feature` で `docs/ideas/YYYYMMDD-[feature-name].md` として管理し、設計は `plan-feature`、実装は `implement-feature`、厳しめの検証は `validate-implementation` を使います。  
 起動確認は `npx expo start`、リモート端末確認は `npx expo start --tunnel` を使います。
 
 ## Working Rules
@@ -55,6 +55,9 @@ This template is the starting point for an AI-driven React Native + Expo + JavaS
 - Do not change the Node version automatically
 - Use `npx expo install` for Expo-related dependencies
 - Reuse the commands, skills, and review agents provided under `.agents/`
+- Keep specs only in `docs/ideas/`
+- Treat `docs/ideas/initial-requirements.md` as the bootstrap input for `setup-project`
+- Treat `docs/ideas/YYYYMMDD-[feature-name].md` as the standard input for `plan-feature`
 - Keep short-term task planning in `.steering/`
 - Keep durable product and engineering documentation in `docs/`
 - Update `docs/` when stable requirements or architecture decisions change
@@ -66,6 +69,9 @@ This template is the starting point for an AI-driven React Native + Expo + JavaS
 - Expo SDK や Node のバージョンは自動で変更しません。
 - Expo 関連の依存追加や更新では `npx expo install` を使います。
 - `.agents/` 配下の command、skill、review agent を再利用します。
+- 仕様は `docs/ideas/` にのみ置きます。
+- `docs/ideas/initial-requirements.md` は `setup-project` の入力として扱います。
+- `docs/ideas/YYYYMMDD-[feature-name].md` は `plan-feature` の標準入力として扱います。
 - 短期タスク管理は `.steering/`、長期的に残す設計文書は `docs/` に置きます。
 - 安定した要件や設計判断が変わったら `docs/` を更新します。
 
@@ -74,12 +80,14 @@ This template is the starting point for an AI-driven React Native + Expo + JavaS
 ### 日本語説明
 新規プロジェクトでは、以下のディレクトリやファイル群を標準構成として想定します。
 
-### Initial input
+### Specs
 
 - `docs/ideas/initial-requirements.md`
+- `docs/ideas/YYYYMMDD-[feature-name].md`
 
 #### 日本語説明
-初期要件の整理を始める起点となるファイルです。
+`docs/ideas/` は仕様専用ディレクトリです。  
+`initial-requirements.md` はプロジェクト全体の初期要件、`YYYYMMDD-[feature-name].md` は追加機能の仕様を表します。
 
 ### Durable docs
 

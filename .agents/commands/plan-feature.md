@@ -1,21 +1,34 @@
 ---
-description: 新機能の設計のみを作成する（実装は行わない）
+description: docs/ideas の仕様メモを入力に steering を作成する（実装は行わない）
 ---
 
 # plan-feature
 
-引数: 機能名（例: `plan-feature feature-name`）
+引数: `docs/ideas/...md` の仕様ファイル
 
-このコマンドは新機能の**設計のみ**を作成します。
+例: `plan-feature docs/ideas/20260407-login-refresh.md`
+
+このコマンドは `docs/ideas/` の仕様メモをもとに、新機能の**設計のみ**を作成します。
 コードの実装は行いません。
 
 ---
 
 # 手順
 
-## 1. コンテキスト準備
+## 1. 入力チェック
+
+- 引数がない場合は停止する
+- `docs/ideas/` 配下の候補ファイルを列挙し、対象ファイルを指定するよう案内する
+- 指定ファイルが存在しない場合は停止する
+- 指定ファイルが `docs/ideas/` 配下にない場合は停止する
+- 指定ファイルが `docs/ideas/initial-requirements.md` の場合は停止する
+- `docs/ideas/initial-requirements.md` はプロジェクト初期要件なので、先に `setup-project` を実行するよう案内する
+
+## 2. コンテキスト準備
 
 - `docs/` の永続ドキュメントを読み込む
+- `setup-project` 済みで、永続ドキュメント6点が存在するか確認する
+- 不足している場合は停止し、`setup-project` を先に実行するよう案内する
 - プロジェクトの前提技術を理解する
 
 このプロジェクトの技術スタック
@@ -26,9 +39,11 @@ description: 新機能の設計のみを作成する（実装は行わない）
 
 ---
 
-## 2. 機能の理解
+## 3. 機能の理解
 
-以下を整理する
+- 指定された `docs/ideas/...md` を読み、以下を整理する
+- 会話中の短い補足コメントがある場合は考慮してよい
+- ただし仕様の正本は `docs/ideas/...md` とする
 
 - 機能の目的
 - ユーザー操作
@@ -38,9 +53,10 @@ description: 新機能の設計のみを作成する（実装は行わない）
 
 ---
 
-## 3. steeringディレクトリ作成
+## 4. steeringディレクトリ作成
 
-以下のディレクトリを作成する
+- 仕様ファイル名をもとに対象タスク名を決める
+- 以下のディレクトリを作成する
 
 .steering/[YYYYMMDD]-[feature-name]/
 
@@ -52,7 +68,7 @@ description: 新機能の設計のみを作成する（実装は行わない）
 
 ---
 
-## 4. requirements.md
+## 5. requirements.md
 
 記載内容
 
@@ -63,7 +79,7 @@ description: 新機能の設計のみを作成する（実装は行わない）
 
 ---
 
-## 5. design.md
+## 6. design.md
 
 以下を整理する
 
@@ -77,7 +93,7 @@ React Native / Expo のベストプラクティスを考慮する。
 
 ---
 
-## 6. tasklist.md
+## 7. tasklist.md
 
 実装タスクを小さく分解する。
 
@@ -98,6 +114,10 @@ React Native / Expo のベストプラクティスを考慮する。
 
 このコマンドでは **コードを実装してはいけない**。
 
+`docs/ideas/initial-requirements.md` を入力にしてはいけない。
+
+入力が曖昧な場合は自動推測せず、ユーザーに対象 spec file を指定してもらう。
+
 作成するのは以下の3ファイルのみ
 
 - requirements.md
@@ -112,5 +132,6 @@ React Native / Expo のベストプラクティスを考慮する。
 - requirements.md が作成されている
 - design.md が作成されている
 - tasklist.md が作成されている
+- 次に `implement-feature` に渡せる状態になっている
 
 このコマンドは **設計完了で終了する**。
